@@ -1,5 +1,4 @@
 # nvim-config
-<<<<<<< HEAD
 =======
 just my nvim config repo
 
@@ -15,4 +14,3 @@ just my nvim config repo
 [neoformat](https://github.com/sbdchd/neoformat) for Code Formatting\
 [neovim-session-manager](https://github.com/Shatur/neovim-session-manager) for Session Managing\
 ...
->>>>>>> c35cff2f7baced2658ae0f2aa532f947af02b39e
