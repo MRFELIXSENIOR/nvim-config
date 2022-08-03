@@ -23,19 +23,14 @@ packer.init({
 })
 
 local function load_plugins()
-	require("config.lualine-config")
-	require("config.wilder-config")
-	require("config.nvim-tree-config")
-	require("config.nvim-treesitter-config")
+	--require("config.wilder-config")
 	require("config.nvim-notify-config")
-	require("config.telescope-config")
 	require("config.nvim-lsp-config")
-	require("config.autosave-config")
+	--require("config.autosave-config")
 	require("config.nvim-cmp-config")
 	require("config.alpha-config")
-	require("config.discord-rpc-config")
-	require("config.wk-config")
-	require("config.bufferline-config")
+	--require("config.discord-rpc-config")
+	--require("config.wk-config")
 end
 
 vim.cmd("packadd packer.nvim")
@@ -44,38 +39,66 @@ Manager = {
 		packer.startup(function(use)
 			use("wbthomason/packer.nvim")
 
-			use("lifepillar/vim-gruvbox8")
+			--use("lifepillar/vim-gruvbox8")
 			use("joshdick/onedark.vim")
+			use("ellisonleao/gruvbox.nvim")
 
-			use("nvim-treesitter/nvim-treesitter")
+			--use("Pocco81/AutoSave.nvim")
+			use("Shatur/neovim-session-manager")
+
+			--use("machakann/vim-sandwich")
+			use("windwp/nvim-autopairs")
+
+			use({
+				"nvim-treesitter/nvim-treesitter",
+				event = "BufWinEnter",
+				config = [[require("config.nvim-treesitter-config")]],
+			})
+			use("lewis6991/impatient.nvim")
 
 			use("rcarriga/nvim-notify")
-			use("nvim-lualine/lualine.nvim")
+			use({ "nvim-lualine/lualine.nvim", event = "BufWinEnter", config = [[require("config.lualine-config")]] })
 
-			use("kyazdani42/nvim-web-devicons")
+			use("goolord/alpha-nvim")
+			use({
+				"weilbith/nvim-code-action-menu",
+				cmd = "CodeActionMenu",
+				config = [[vim.g.code_action_menu_window_border = 'single']],
+			})
+			--use("andweeb/presence.nvim")
+			use("nathom/filetype.nvim")
 
-			use("907th/vim-auto-save")
-			use("karb94/neoscroll.nvim")
-			use("easymotion/vim-easymotion")
+			use({ "folke/which-key.nvim", event = "BufWinEnter", config = [[require("config.wk-config")]] })
+			use({ "akinsho/bufferline.nvim", event = "BufWinEnter", config = [[require("config.bufferline-config")]] })
+
+			use({ "sbdchd/neoformat", event = "BufWinEnter" })
+			--use("EdenEast/nightfox.nvim")
+			use("antoinemadec/FixCursorHold.nvim")
+
+			use({ "kyazdani42/nvim-web-devicons", event = "BufWinEnter" })
+
+			--use("easymotion/vim-easymotion")
 
 			use({
 				"kyazdani42/nvim-tree.lua",
 				tag = "nightly",
+				event = "BufWinEnter",
+				config = [[require("config.nvim-tree-config")]],
 			})
 
-			use("cdelledonne/vim-cmake")
-			use("tpope/vim-fugitive")
+			--use("cdelledonne/vim-cmake")
+			--use("tpope/vim-fugitive")
 
-			use("antoinemadec/FixCursorHold.nvim")
-
-			use({
+			--[[use({
 				"gelguy/wilder.nvim",
 				requires = {
 					"roxma/nvim-yarp",
 					"roxma/vim-hug-neovim-rpc",
 				},
-			})
+			})]]
+			--
 
+			--use("tweekmonster/startuptime.vim")
 			use("neovim/nvim-lspconfig")
 			use("williamboman/nvim-lsp-installer")
 			use("onsails/lspkind.nvim")
@@ -84,37 +107,17 @@ Manager = {
 				"hrsh7th/nvim-cmp",
 				requires = {
 					"hrsh7th/cmp-nvim-lsp",
-					"hrsh7th/cmp-buffer",
-					"hrsh7th/cmp-path",
 				},
 			})
 
-			use({
-				"L3MON4D3/LuaSnip",
-				requires = {
-					"saadparwaiz1/cmp_luasnip",
-				},
-			})
-
-			use("Pocco81/AutoSave.nvim")
-			use("Shatur/neovim-session-manager")
-
-			use("machakann/vim-sandwich")
-			use("windwp/nvim-autopairs")
-
+			use({ "hrsh7th/cmp-vsnip", after = "nvim-cmp" })
+			use({ "hrsh7th/vim-vsnip", after = "nvim-cmp" })
 			use({
 				"nvim-telescope/telescope.nvim",
 				requires = { "nvim-lua/plenary.nvim" },
+				event = "BufWinEnter",
+				config = [[require("config.telescope-config")]],
 			})
-
-			use("goolord/alpha-nvim")
-			use("andweeb/presence.nvim")
-
-			use("skywind3000/asyncrun.vim")
-			use("folke/which-key.nvim")
-			use("akinsho/bufferline.nvim")
-
-			use("sbdchd/neoformat")
 		end)
 	end,
 
@@ -131,10 +134,10 @@ Manager = {
 		end
 	end,
 
-    ["Init"] = function()
-        Manager.LoadPacker()
-        Manager.LoadPlugins()
-    end
+	["Init"] = function()
+		Manager.LoadPacker()
+		Manager.LoadPlugins()
+	end,
 }
 
 return Manager

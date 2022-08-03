@@ -1,6 +1,3 @@
-local keymaps = require("keymaps")
-keymaps.LoadKeyMaps()
-
 local set = vim.opt
 
 local function exec(cmd)
@@ -11,6 +8,8 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 exec("set noswapfile")
+exec("set cmdheight=1")
+vim.g.did_load_filetypes = 1
 set.syn = "on"
 set.expandtab = true
 set.shiftwidth = 4
@@ -27,7 +26,7 @@ set.si = true
 set.hlsearch = true
 set.incsearch = true
 set.encoding = "utf-8"
-set.signcolumn = "number"
+set.signcolumn = "yes:2"
 set.clipboard = "unnamedplus"
 
 set.mouse = "a"
@@ -35,21 +34,41 @@ set.autoindent = true
 
 set.termguicolors = true
 set.hidden = true
-set.updatetime = 150
+set.updatetime = 300
+set.cursorline = true
 
 ----- LOAD PLUGINS -----
 
 local plugins = require("plugins")
 plugins.Init()
 
-require("nvim-autopairs").setup({
-	disable_filetype = { "TelescopePrompt", "vim" },
-	disable_in_macro = true,
+require("impatient")
+require("gruvbox").setup({
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = false,
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	invert_intend_guides = false,
+	overrides = {},
 })
 
+local keymaps = require("keymaps")
+keymaps.LoadKeyMaps()
+
 local function setColorscheme(name)
-	vim.cmd("colorscheme " .. name)
+	exec("colorscheme " .. name)
 end
+
+require("nvim-autopairs").setup({
+	disable_filetype = { "TelescopePrompt" },
+	disable_in_macro = true,
+	disable_in_visualblock = true,
+	enable_bracket_in_quote = true,
+})
 
 autocmd({ "CursorHold" }, {
 	group = augroup("AutoLineDiagnosticsShowing", {}),
@@ -58,11 +77,14 @@ autocmd({ "CursorHold" }, {
 	end,
 })
 
-autocmd({ "BufWritePost" }, {
+autocmd({ "BufWritePre" }, {
 	group = augroup("AutoFormatOnSave", {}),
 	callback = function()
-		vim.cmd(":Neoformat")
+		exec("Neoformat")
 	end,
 })
 
-setColorscheme("onedark")
+exec("let g:cursorhold_updatetime = 500")
+vim.o.background = "dark"
+
+setColorscheme("gruvbox")

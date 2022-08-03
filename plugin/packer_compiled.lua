@@ -69,11 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["AutoSave.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\AutoSave.nvim",
-    url = "https://github.com/Pocco81/AutoSave.nvim"
-  },
   ["FixCursorHold.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\FixCursorHold.nvim",
@@ -84,30 +79,41 @@ _G.packer_plugins = {
     path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
-  ["cmp-buffer"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-cmdline"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
+  ["bufferline.nvim"] = {
+    config = { 'require("config.bufferline-config")' },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-path"] = {
+  ["cmp-vsnip"] = {
+    after_files = { "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\cmp-vsnip\\after\\plugin\\cmp_vsnip.vim" },
+    load_after = {},
     loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
+    needs_bufread = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\cmp-vsnip",
+    url = "https://github.com/hrsh7th/cmp-vsnip"
   },
-  ["lsp-format.nvim"] = {
+  ["filetype.nvim"] = {
     loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lsp-format.nvim",
-    url = "https://github.com/lukas-reineke/lsp-format.nvim"
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\filetype.nvim",
+    url = "https://github.com/nathom/filetype.nvim"
+  },
+  ["gruvbox.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["lspkind.nvim"] = {
     loaded = true,
@@ -115,18 +121,25 @@ _G.packer_plugins = {
     url = "https://github.com/onsails/lspkind.nvim"
   },
   ["lualine.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
+    config = { 'require("config.lualine-config")' },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["neoscroll.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neoscroll.nvim",
-    url = "https://github.com/karb94/neoscroll.nvim"
+  neoformat = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\neoformat",
+    url = "https://github.com/sbdchd/neoformat"
   },
   ["neovim-session-manager"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neovim-session-manager",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\neovim-session-manager",
     url = "https://github.com/Shatur/neovim-session-manager"
   },
   ["nvim-autopairs"] = {
@@ -138,6 +151,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-code-action-menu"] = {
+    commands = { "CodeActionMenu" },
+    config = { "vim.g.code_action_menu_window_border = 'single'" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-code-action-menu",
+    url = "https://github.com/weilbith/nvim-code-action-menu"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -155,24 +177,27 @@ _G.packer_plugins = {
     url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-tree.lua",
+    config = { 'require("config.nvim-tree-config")' },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-treesitter",
+    config = { 'require("config.nvim-treesitter-config")' },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-web-devicons",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
-  ["nvim-yarp"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-yarp",
-    url = "https://github.com/roxma/nvim-yarp"
   },
   ["onedark.vim"] = {
     loaded = true,
@@ -190,58 +215,50 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["telescope.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope.nvim",
+    config = { 'require("config.telescope-config")' },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ultisnips = {
+  ["vim-vsnip"] = {
+    load_after = {},
     loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\ultisnips",
-    url = "https://github.com/SirVer/ultisnips"
+    needs_bufread = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\vim-vsnip",
+    url = "https://github.com/hrsh7th/vim-vsnip"
   },
-  ["vim-auto-save"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-auto-save",
-    url = "https://github.com/907th/vim-auto-save"
-  },
-  ["vim-cmake"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-cmake",
-    url = "https://github.com/cdelledonne/vim-cmake"
-  },
-  ["vim-easymotion"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-easymotion",
-    url = "https://github.com/easymotion/vim-easymotion"
-  },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-fugitive",
-    url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-gruvbox8"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-gruvbox8",
-    url = "https://github.com/lifepillar/vim-gruvbox8"
-  },
-  ["vim-hug-neovim-rpc"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-hug-neovim-rpc",
-    url = "https://github.com/roxma/vim-hug-neovim-rpc"
-  },
-  ["vim-sandwich"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-sandwich",
-    url = "https://github.com/machakann/vim-sandwich"
-  },
-  ["wilder.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\wilder.nvim",
-    url = "https://github.com/gelguy/wilder.nvim"
+  ["which-key.nvim"] = {
+    config = { 'require("config.wk-config")' },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "C:\\Users\\tpc\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-cmp ]]
+vim.cmd [[ packadd cmp-vsnip ]]
+vim.cmd [[ packadd vim-vsnip ]]
+time([[Sequenced loading]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file CodeActionMenu lua require("packer.load")({'nvim-code-action-menu'}, { cmd = "CodeActionMenu", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+time([[Defining lazy-load commands]], false)
+
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-tree.lua', 'which-key.nvim', 'bufferline.nvim', 'nvim-web-devicons', 'neovim-session-manager', 'telescope.nvim', 'neoformat', 'lualine.nvim', 'nvim-treesitter'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
