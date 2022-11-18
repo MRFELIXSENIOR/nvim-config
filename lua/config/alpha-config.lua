@@ -32,12 +32,12 @@ dashboard.section.header.val = {
 
 local button = dashboard.button
 dashboard.section.buttons.val = {
-	button("e", "1.   > New file", ":ene <BAR> startinsert <CR>"),
-	button("r", "2.   > Recent", ":SessionManager load_last_session<CR>"),
-	button("d", "3.   > Session In Current Directory", ":SessionManager load_current_dir_session<CR>"),
+	button("e", "1.   > New file", ":silent ene <BAR> startinsert<CR>"),
+	button("r", "2.   > Recent", ":silent SessionManager load_last_session<CR>"),
+	button("d", "3.   > Session In Current Directory", ":silent SessionManager load_current_dir_session<CR>"),
 	button("f", "4.   > Find file", ts_find),
-	button("s", "5.   > Settings", ":e $MYVIMRC | :cd %:p:h<CR>"),
-	button("q", "6.   > Exit NEOVIM", ":qa<CR>"),
+	button("s", "5.   > Settings", ":silent e $MYVIMRC | :cd %:p:h<CR>"),
+	button("q", "6.   > Exit NEOVIM", ":silent qa<CR>"),
 }
 
 alpha.setup(dashboard.opts)

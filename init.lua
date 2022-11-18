@@ -1,48 +1,41 @@
+local theme = 'gruvbox'
+
 local set = vim.opt
+local au = vim.api.nvim_create_autocmd
+local augr = vim.api.nvim_create_augroup
 
-local function exec(cmd)
-	vim.cmd(tostring(cmd))
-end
+vim.cmd "set noswapfile"
+vim.cmd "set cmdheight=1"
 
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
-exec("set noswapfile")
-exec("set cmdheight=1")
-vim.g.did_load_filetypes = 1
-set.syn = "on"
-set.expandtab = true
-set.shiftwidth = 4
-set.softtabstop = 4
+set.syn = 'on'
 set.tabstop = 4
-
+set.softtabstop = 4
+set.shiftwidth = 4
+set.expandtab = true
+set.autoindent = true
 set.smarttab = true
 set.smartcase = true
-
 set.number = true
 
 set.is = true
 set.si = true
 set.hlsearch = true
 set.incsearch = true
-set.encoding = "utf-8"
-set.signcolumn = "yes:2"
-set.clipboard = "unnamedplus"
+set.encoding = 'utf-8'
+set.signcolumn = 'yes:2'
+set.clipboard = 'unnamedplus'
 
-set.mouse = "a"
-set.autoindent = true
-
-set.termguicolors = true
+set.mouse = 'a'
 set.hidden = true
 set.updatetime = 300
 set.cursorline = true
-
------ LOAD PLUGINS -----
+set.termguicolors = true
+set.background = 'dark'
 
 local plugins = require("plugins")
-plugins.Init()
-
+plugins.Load()
 require("impatient")
+
 require("gruvbox").setup({
 	undercurl = true,
 	underline = true,
@@ -59,10 +52,6 @@ require("gruvbox").setup({
 local keymaps = require("keymaps")
 keymaps.LoadKeyMaps()
 
-local function setColorscheme(name)
-	exec("colorscheme " .. name)
-end
-
 require("nvim-autopairs").setup({
 	disable_filetype = { "TelescopePrompt" },
 	disable_in_macro = true,
@@ -70,21 +59,19 @@ require("nvim-autopairs").setup({
 	enable_bracket_in_quote = true,
 })
 
-autocmd({ "CursorHold" }, {
-	group = augroup("AutoLineDiagnosticsShowing", {}),
+local augrCmd = augr("AutocmdGroup", {})
+au({ "CursorHold" }, {
+	group = augrCmd,
 	callback = function()
-		vim.diagnostic.open_float({ scope = "cursor" })
+		vim.diagnostic.open_float({ scope = 'cursor' })
 	end,
 })
 
-autocmd({ "BufWritePre" }, {
-	group = augroup("AutoFormatOnSave", {}),
+au({ "BufWritePre" }, {
+	group = augrCmd,
 	callback = function()
-		exec("Neoformat")
+		vim.cmd "Neoformat"
 	end,
 })
 
-exec("let g:cursorhold_updatetime = 500")
-vim.o.background = "dark"
-
-setColorscheme("gruvbox")
+vim.cmd("colorscheme "..theme)
