@@ -21,7 +21,6 @@ local function loadPaq()
 		"akinsho/bufferline.nvim";
 		"sbdchd/neoformat";
 		"folke/which-key.nvim";
-		"goolord/alpha-nvim";
 		"weilbith/nvim-code-action-menu";
 		"antoinemadec/FixCursorHold.nvim";
 
