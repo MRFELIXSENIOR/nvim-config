@@ -31,25 +31,20 @@ require("nvim-lsp-installer").setup({
 local cap = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lua_config = {
-    Lua = {
-        diagnostics = {
-            globals = { "vim" },
-        },
-
-        completion = {
-            showWord = "Disable",
-            workspaceWord = false,
-        },
-    },
-	capabilities = cap
+	Lua = {
+		diagnostics = {
+			globals = { "vim" },
+		},
+	},
+	capabilities = cap,
 }
 
 local clangd_config = {
-	capabilities = cap
+	capabilities = cap,
 }
 
 local tsserver_config = {
-	capabilities = cap
+	capabilities = cap,
 }
 
 lsp["sumneko_lua"].setup(lua_config)
@@ -58,11 +53,40 @@ lsp["tsserver"].setup(tsserver_config)
 --End LSPConfig
 
 --CMP Configuration
+
+local cmp_kinds = {
+	Text = "  ",
+	Method = "  ",
+	Function = "  ",
+	Constructor = "  ",
+	Field = "  ",
+	Variable = "  ",
+	Class = "  ",
+	Interface = "  ",
+	Module = "  ",
+	Property = "  ",
+	Unit = "  ",
+	Value = "  ",
+	Enum = "  ",
+	Keyword = "  ",
+	Snippet = "  ",
+	Color = "  ",
+	File = "  ",
+	Reference = "  ",
+	Folder = "  ",
+	EnumMember = "  ",
+	Constant = "  ",
+	Struct = "  ",
+	Event = "  ",
+	Operator = "  ",
+	TypeParameter = "  ",
+}
+
 cmp.setup({
 	completion = { completeopt = "menu,menuone,noinsert" },
 	enabled = function()
 		local context = require("cmp.config.context")
-		if vim.api.nvim_get_mode().mode == 'c' then
+		if vim.api.nvim_get_mode().mode == "c" then
 			return true
 		else
 			return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
@@ -97,14 +121,9 @@ cmp.setup({
 	}),
 
 	formatting = {
-		fields = { "kind", "abbr", "menu" },
-		format = function(entry, vim_item)
-			local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-			local strings = vim.split(kind.kind, "%s", { trimempty = true })
-			kind.kind = " " .. strings[1] .. " "
-			kind.menu = "    [" .. strings[2] .. "]"
-
-			return kind
+		format = function(_, vim_item)
+			vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
+			return vim_item
 		end,
 	},
 })
