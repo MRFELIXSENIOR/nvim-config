@@ -2,58 +2,71 @@ local lsp = require("lspconfig")
 local cmp = require("cmp")
 local ap = require("nvim-autopairs.completion.cmp")
 
-local keymap = require("keymaps")
-local opt = { noremap = true, silent = true }
-
-keymap.nmap("gd", ":lua vim.lsp.buf.definition()<cr>", opt)
-keymap.nmap("gD", ":lua vim.lsp.buf.declaration()<cr>", opt)
-keymap.nmap("gi", ":lua vim.lsp.buf.implementation()<cr>", opt)
-keymap.nmap("gw", ":lua vim.lsp.buf.document_symbol()<cr>", opt)
-keymap.nmap("gw", ":lua vim.lsp.buf.workspace_symbol()<cr>", opt)
-keymap.nmap("gr", ":lua vim.lsp.buf.references()<cr>", opt)
-keymap.nmap("gt", ":lua vim.lsp.buf.type_definition()<cr>", opt)
-keymap.nmap("K", ":lua vim.lsp.buf.hover()<CR>", opt)
-keymap.nmap("<c-k>", ":lua vim.lsp.buf.signature_help()<cr>", opt)
-keymap.nmap("<leader>af", ":lua vim.lsp.buf.code_action()<cr>", opt)
-keymap.nmap("<leader>rn", ":lua vim.lsp.buf.rename()<cr>", opt)
-
 -- LSP Servers Configuration
-require("nvim-lsp-installer").setup({
+require('mason').setup({
 	ui = {
-		icons = {
-			server_installed = "✅",
-			server_pending = "🔄",
-			server_uninstalled = "✗",
-		},
-	},
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
 })
 
 local cap = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local function on_attach(client)
+	require('completion').on_attach(client)
+end
 
-local lua_config = {
-	Lua = {
-		diagnostics = {
-			globals = { "vim" },
-		},
+local cxx_config = {
+	cmd = {
+		"clangd",
+		"--header-insertion=never",
+		"--completion-style=detailed",
+	}
+}
+local lua_config = { 
+	Lua = { 
+		diagnostics = { globals = { "vim" } } 
+	}, 
+}
+local rust_config = {
+	settings = {
+		['rust-analyzer'] = {
+			diagnostics = {
+				enable = true;
+			}
+		}
 	},
-	capabilities = cap,
 }
 
-local clangd_config = {
-	capabilities = cap,
+--	name, config
+local configured_sv = {
+	{ "lua_ls", lua_config },
+	{ "clangd", cxx_config },
+	{ "rust_analyzer", rust_config },
 }
 
-local tsserver_config = {
-	capabilities = cap,
+local no_config_sv = {
+	"tsserver",
+	"cmake",
 }
 
-lsp["sumneko_lua"].setup(lua_config)
-lsp["clangd"].setup(clangd_config)
-lsp["tsserver"].setup(tsserver_config)
+local no_config = { capabilities = cap }
+
+for i=1,#configured_sv do
+	local config = configured_sv[i][2]
+	config.capabilities = cap
+	config.on_attach = on_attach
+	lsp[configured_sv[i][1]].setup(config)
+end
+
+for i=1,#no_config_sv do
+	lsp[no_config_sv[i]].setup(no_config)
+end
 --End LSPConfig
 
 --CMP Configuration
-
 local cmp_kinds = {
 	Text = "  ",
 	Method = "  ",

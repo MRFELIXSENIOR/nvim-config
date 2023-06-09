@@ -6,6 +6,7 @@ local function loadPaq()
 		"joshdick/onedark.vim";
 		"ellisonleao/gruvbox.nvim";
 		"EdenEast/nightfox.nvim";
+		"catppuccin/nvim";
 
 		"Pocco81/AutoSave.nvim";
 		"Shatur/neovim-session-manager";
@@ -19,10 +20,11 @@ local function loadPaq()
 		"rcarriga/nvim-notify";
 		"nvim-lualine/lualine.nvim";
 		"akinsho/bufferline.nvim";
-		"sbdchd/neoformat";
+		'mhartington/formatter.nvim';
 		"folke/which-key.nvim";
 		"weilbith/nvim-code-action-menu";
 		"antoinemadec/FixCursorHold.nvim";
+		"andweeb/presence.nvim";
 
 		"kyazdani42/nvim-web-devicons";
 		"kyazdani42/nvim-tree.lua";
@@ -31,7 +33,7 @@ local function loadPaq()
 		"roxma/vim-hug-neovim-rpc";
 
 		"neovim/nvim-lspconfig";
-		"williamboman/nvim-lsp-installer";
+		"williamboman/mason.nvim";
 		"onsails/lspkind.nvim";
 
 		"hrsh7th/nvim-cmp";
@@ -46,6 +48,9 @@ end
 
 local function loadConfig()
 	require("config.wilder-config")
+	require("config.telescope-config")
+	require("config.formatter-config")
+	require("config.session-mgr-config")
 	require("config.nvim-notify-config")
 	require("config.completion-config")
 	require("config.autosave-config")
@@ -53,8 +58,7 @@ local function loadConfig()
     require("config.nvim-treesitter-config")
     require("config.lualine-config")
     require("config.bufferline-config")
-	require("config.alpha-config")
-	--require("config.discord-rpc-config")
+	require("config.discord-rpc-config")
 end
 
 Manager = {

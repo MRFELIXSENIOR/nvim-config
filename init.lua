@@ -27,20 +27,25 @@ set.clipboard = 'unnamedplus'
 
 set.mouse = 'a'
 set.hidden = true
-set.updatetime = 300
+set.updatetime = 150
 set.cursorline = true
 set.termguicolors = true
 set.background = 'dark'
 
 local plugins = require("plugins")
 plugins.Load()
-require("impatient")
 
+require("impatient")
 require("gruvbox").setup({
 	undercurl = true,
 	underline = true,
 	bold = true,
-	italic = false,
+	italic = {
+		strings = false,
+		operators = false,
+		comments = false,
+		folds = false,
+	},
 	strikethrough = true,
 	invert_selection = false,
 	invert_signs = false,
@@ -70,7 +75,7 @@ au({ "CursorHold" }, {
 au({ "BufWritePre" }, {
 	group = augrCmd,
 	callback = function()
-		vim.cmd "Neoformat"
+		vim.cmd "Format"
 	end,
 })
 
