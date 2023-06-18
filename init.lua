@@ -1,4 +1,4 @@
-local theme = 'gruvbox'
+local theme = 'duskfox'
 
 local set = vim.opt
 local au = vim.api.nvim_create_autocmd
@@ -25,9 +25,14 @@ set.encoding = 'utf-8'
 set.signcolumn = 'yes:2'
 set.clipboard = 'unnamedplus'
 
+set.foldenable = true
+set.foldcolumn = '1'
+set.foldlevel = 99
+set.foldlevelstart = 99
+
 set.mouse = 'a'
 set.hidden = true
-set.updatetime = 150
+set.updatetime = 100
 set.cursorline = true
 set.termguicolors = true
 set.background = 'dark'
@@ -69,13 +74,6 @@ au({ "CursorHold" }, {
 	group = augrCmd,
 	callback = function()
 		vim.diagnostic.open_float({ scope = 'cursor' })
-	end,
-})
-
-au({ "BufWritePre" }, {
-	group = augrCmd,
-	callback = function()
-		vim.cmd "Format"
 	end,
 })
 

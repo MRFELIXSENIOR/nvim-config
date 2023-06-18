@@ -1,6 +1,6 @@
 local autosave = require("auto-save")
 
-autosave.setup({
+autosave.setup {
 	enabled = true,
 	execution_message = {
         message = function ()
@@ -10,16 +10,15 @@ autosave.setup({
     },
 	trigger_events = { "InsertLeave", "CursorHold" },
     condition = function(buf)
-		local fn = vim.fn
 		local utils = require("auto-save.utils.data")
 
 		if
-			fn.getbufvar(buf, "&modifiable") == 1 and
-			utils.not_in(fn.getbufvar(buf, "&filetype"), {}) then
+			vim.fn.getbufvar(buf, "&modifiable") == 1 and
+			utils.not_in(vim.fn.getbufvar(buf, "&filetype"), {}) then
 			return true -- met condition(s), can save
 		end
 		return false -- can't save
 	end,
     write_all_buffers = true,
 	debounce_delay = 200,
-})
+}

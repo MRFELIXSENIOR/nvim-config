@@ -8,7 +8,7 @@ local function loadPaq()
 		"EdenEast/nightfox.nvim";
 		"catppuccin/nvim";
 
-		"Pocco81/AutoSave.nvim";
+		"Pocco81/auto-save.nvim";
 		"Shatur/neovim-session-manager";
 
 		"machakann/vim-sandwich";
@@ -31,7 +31,8 @@ local function loadPaq()
 		"gelguy/wilder.nvim";
 		"roxma/nvim-yarp";
 		"roxma/vim-hug-neovim-rpc";
-
+		
+		"anuvyklack/pretty-fold.nvim";
 		"neovim/nvim-lspconfig";
 		"williamboman/mason.nvim";
 		"onsails/lspkind.nvim";
@@ -59,6 +60,7 @@ local function loadConfig()
     require("config.lualine-config")
     require("config.bufferline-config")
 	require("config.discord-rpc-config")
+	require('config.fold-config')
 end
 
 Manager = {

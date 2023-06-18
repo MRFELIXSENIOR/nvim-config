@@ -1,7 +1,7 @@
 local rpc = require('presence')
 
 rpc.setup({
-    auto_update = true,
+    auto_update = false,
     neovim_image_text = 'NVCode',
     main_image = 'neovim',
     buttons = true,
