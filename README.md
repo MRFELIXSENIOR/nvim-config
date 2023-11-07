@@ -2,7 +2,7 @@
 
 just my nvim config repo
 
-### [paq-nvim](https://github.com/savq/paq-nvim) for Package Manager
+### [packer.nvim]([https://github.com/savq/paq-nvim](https://github.com/wbthomason/packer.nvim)) for Package Manager
 ### [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) for Neovim LSP Client
 ### [mason.nvim](https://github.com/williamboman/mason.nvim) for Neovim LSP Servers Managing
 ### [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) for Syntax Highlighting
