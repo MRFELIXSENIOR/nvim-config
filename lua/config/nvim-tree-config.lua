@@ -1,5 +1,4 @@
 local tree = require('nvim-tree')
-local treecall = require('nvim-tree.config').nvim_tree_callback
 local keymaps = require('keymaps')
 
 local function on_attach(bufnr)

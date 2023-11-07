@@ -22,33 +22,24 @@ keymaps.LoadKeyMaps = function()
 		[[<cmd>lua require("telescope.builtin").diagnostics(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
 	local telescope_def =
 		[[<cmd>lua require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
-	local telescope_im =
-		[[<cmd>lua require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
+	local telescope_colorscheme =
+		[[<cmd>lua require("telescope.builtin").colorscheme(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
+	local telescope_doc_sym =
+		[[<cmd>lua require("telescope.builtin").lsp_document_symbols(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
+	local telescope_ws_sym =
+		[[<cmd>lua require("telescope.builtin").lsp_workspace_symbols(require("telescope.themes").get_dropdown({ winblend = 20 }))<CR>]]
 	
 	keymaps.nmap("<leader>x", ":NvimTreeToggle<CR>",opt)
 	keymaps.nmap("<leader>`", ":e $MYVIMRC<CR>", 	opt)
 	keymaps.nmap("<leader>c", ":CodeActionMenu<CR>",opt)
 	keymaps.nmap("<leader>d", telescope_def, 		opt)
 	keymaps.nmap("<leader>f", telescope_f, 			opt)
-	keymaps.nmap("<leader>i", telescope_im, 		opt)
-
 	keymaps.nmap("<leader>D", telescope_d, 			opt)
 	
-	--LSP Keymap Stuffs
-	keymaps.nmap("gd", ":lua vim.lsp.buf.definition()<cr>", opt)
-	keymaps.nmap("gD", ":lua vim.lsp.buf.declaration()<cr>", opt)
-	keymaps.nmap("gi", ":lua vim.lsp.buf.implementation()<cr>", opt)
-	keymaps.nmap("gw", ":lua vim.lsp.buf.document_symbol()<cr>", opt)
-	keymaps.nmap("gw", ":lua vim.lsp.buf.workspace_symbol()<cr>", opt)
-	keymaps.nmap("gr", ":lua vim.lsp.buf.references()<cr>", opt)
-	keymaps.nmap("gt", ":lua vim.lsp.buf.type_definition()<cr>", opt)
-	keymaps.nmap("K", ":lua vim.lsp.buf.hover()<CR>", opt)
-	keymaps.nmap("<c-k>", ":lua vim.lsp.buf.signature_help()<cr>", opt)
-	keymaps.nmap("<leader>af", ":lua vim.lsp.buf.code_action()<cr>", opt)
-	keymaps.nmap("<leader>rn", ":lua vim.lsp.buf.rename()<cr>", opt)
-	
-	keymaps.nmap("[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
-	keymaps.nmap("]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
+	keymaps.nmap("sK", ":lua vim.lsp.buf.hover()<CR>", 	opt)
+	keymaps.nmap("sS", telescope_colorscheme,			opt)
+	keymaps.nmap("sw", telescope_doc_sym,				opt)
+	keymaps.nmap("sW", telescope_ws_sym,				opt)
 end
 
 return keymaps

@@ -1,11 +1,8 @@
-local theme = 'duskfox'
-
 local set = vim.opt
 local au = vim.api.nvim_create_autocmd
 local augr = vim.api.nvim_create_augroup
 
-vim.cmd "set noswapfile"
-vim.cmd "set cmdheight=1"
+set.swapfile = false
 
 set.syn = 'on'
 set.tabstop = 4
@@ -15,10 +12,11 @@ set.expandtab = true
 set.autoindent = true
 set.smarttab = true
 set.smartcase = true
+set.smartindent = true
+set.cindent = true
 set.number = true
 
 set.is = true
-set.si = true
 set.hlsearch = true
 set.incsearch = true
 set.encoding = 'utf-8'
@@ -37,37 +35,10 @@ set.cursorline = true
 set.termguicolors = true
 set.background = 'dark'
 
-local plugins = require("plugins")
-plugins.Load()
-
-require("impatient")
-require("gruvbox").setup({
-	undercurl = true,
-	underline = true,
-	bold = true,
-	italic = {
-		strings = false,
-		operators = false,
-		comments = false,
-		folds = false,
-	},
-	strikethrough = true,
-	invert_selection = false,
-	invert_signs = false,
-	invert_tabline = false,
-	invert_intend_guides = false,
-	overrides = {},
-})
-
-local keymaps = require("keymaps")
-keymaps.LoadKeyMaps()
-
-require("nvim-autopairs").setup({
-	disable_filetype = { "TelescopePrompt" },
-	disable_in_macro = true,
-	disable_in_visualblock = true,
-	enable_bracket_in_quote = true,
-})
+require('plugins').Load()
+require('plugins').Setup()
+require("keymaps").LoadKeyMaps()
+require('theme_changer').Setup()
 
 local augrCmd = augr("AutocmdGroup", {})
 au({ "CursorHold" }, {
@@ -77,4 +48,4 @@ au({ "CursorHold" }, {
 	end,
 })
 
-vim.cmd("colorscheme "..theme)
+require('theme_changer').Apply()

@@ -1,53 +1,55 @@
-local function loadPaq()
-	vim.cmd "packadd paq-nvim"
-	require "paq" {
-		{ "savq/paq-nvim", opt=true };
+local function LoadManager()
+	local packer = require 'packer' 
+	packer.startup(function(use)
+		use 'wbthomason/packer.nvim'
 
-		"joshdick/onedark.vim";
-		"ellisonleao/gruvbox.nvim";
-		"EdenEast/nightfox.nvim";
-		"catppuccin/nvim";
+		use "joshdick/onedark.vim"
+		use "ellisonleao/gruvbox.nvim"
+		use "EdenEast/nightfox.nvim"
+		use "catppuccin/nvim"
+		use "cpea2506/one_monokai.nvim"
+		use "tanvirtin/monokai.nvim"
 
-		"Pocco81/auto-save.nvim";
-		"Shatur/neovim-session-manager";
+		use "Pocco81/auto-save.nvim"
+		use "Shatur/neovim-session-manager"
 
-		"machakann/vim-sandwich";
-		"windwp/nvim-autopairs";
+		use "machakann/vim-sandwich"
+		use "windwp/nvim-autopairs"
 
-		"nvim-treesitter/nvim-treesitter";
-		"lewis6991/impatient.nvim";
+		use "nvim-treesitter/nvim-treesitter"
+		use "lewis6991/impatient.nvim"
 
-		"rcarriga/nvim-notify";
-		"nvim-lualine/lualine.nvim";
-		"akinsho/bufferline.nvim";
-		'mhartington/formatter.nvim';
-		"folke/which-key.nvim";
-		"weilbith/nvim-code-action-menu";
-		"antoinemadec/FixCursorHold.nvim";
-		"andweeb/presence.nvim";
+		use "rcarriga/nvim-notify"
+		use "nvim-lualine/lualine.nvim"
+		use "akinsho/bufferline.nvim"
+		use 'mhartington/formatter.nvim'
+		use "folke/which-key.nvim"
+		use "weilbith/nvim-code-action-menu"
+		use "antoinemadec/FixCursorHold.nvim"
+		use "andweeb/presence.nvim"
 
-		"kyazdani42/nvim-web-devicons";
-		"kyazdani42/nvim-tree.lua";
-		"gelguy/wilder.nvim";
-		"roxma/nvim-yarp";
-		"roxma/vim-hug-neovim-rpc";
+		use "kyazdani42/nvim-web-devicons"
+		use "kyazdani42/nvim-tree.lua"
+		use "gelguy/wilder.nvim"
+		use "roxma/nvim-yarp"
+		use "roxma/vim-hug-neovim-rpc"
 		
-		"anuvyklack/pretty-fold.nvim";
-		"neovim/nvim-lspconfig";
-		"williamboman/mason.nvim";
-		"onsails/lspkind.nvim";
+		use "anuvyklack/pretty-fold.nvim"
+		use "neovim/nvim-lspconfig"
+		use "williamboman/mason.nvim"
+		use "onsails/lspkind.nvim"
 
-		"hrsh7th/nvim-cmp";
-		"hrsh7th/cmp-nvim-lsp";
-		"hrsh7th/cmp-vsnip";
-		"hrsh7th/vim-vsnip";
+		use "hrsh7th/nvim-cmp"
+		use "hrsh7th/cmp-nvim-lsp"
+		use "hrsh7th/cmp-vsnip"
+		use "hrsh7th/vim-vsnip"
 
-		"nvim-telescope/telescope.nvim";
-        "nvim-lua/plenary.nvim"
-	}
+		use "nvim-telescope/telescope.nvim"
+        use "nvim-lua/plenary.nvim"
+	end)
 end
 
-local function loadConfig()
+function LoadConfig()
 	require("config.wilder-config")
 	require("config.telescope-config")
 	require("config.formatter-config")
@@ -61,12 +63,43 @@ local function loadConfig()
     require("config.bufferline-config")
 	require("config.discord-rpc-config")
 	require('config.fold-config')
+	require("config.wk-config")
+end
+
+function Setup()
+	require("impatient")
+	require("gruvbox").setup({
+		undercurl = true,
+		underline = true,
+		bold = true,
+		italic = {
+			strings = false,
+			operators = false,
+			comments = false,
+			folds = false,
+		},
+		strikethrough = true,
+		invert_selection = false,
+		invert_signs = false,
+		invert_tabline = false,
+		invert_intend_guides = false,
+		overrides = {},
+	})
+
+
+	require("nvim-autopairs").setup({
+		disable_filetype = { "TelescopePrompt" },
+		disable_in_macro = true,
+		disable_in_visualblock = true,
+		enable_bracket_in_quote = true,
+	})
 end
 
 Manager = {
-	["LoadPaq"] = loadPaq,
-	["LoadConfig"] = function()
-		local success, errmsg = pcall(loadConfig)
+	["Load"] = function()
+		LoadManager()
+		
+		local success, errmsg = pcall(LoadConfig)
 		if success then
 			vim.notify("Plugins Loaded!", "info", { title = "info", timeout = 2000 })
 		else
@@ -77,11 +110,8 @@ Manager = {
 			)
 		end
 	end,
-
-	["Load"] = function()
-		Manager.LoadPaq()
-		Manager.LoadConfig()
-	end,
+	
+	["Setup"] = Setup
 }
 
 return Manager
